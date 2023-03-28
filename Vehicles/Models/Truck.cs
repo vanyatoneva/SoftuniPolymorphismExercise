@@ -10,12 +10,20 @@ namespace Vehicles.Models
     {
         private const double conditionerFuelConsumption = 1.6;
         private const double fuelReductionPercent = 5;
-        public Truck(double fuelQuantity, double fuelConsumption) : base(fuelQuantity, fuelConsumption)
+        public Truck(double fuelQuantity, double fuelConsumption, double tankCapacity) : base(fuelQuantity, fuelConsumption, tankCapacity)
         {
         }
         protected override double ConditionerFuelConsumption => conditionerFuelConsumption;
 
         public override void Refuel(double litres)
-            => FuelQuantity += (litres * (1 - (fuelReductionPercent * 0.01)));
+        {
+            CheckFuel(litres);
+            FuelQuantity += (litres * (1 - (fuelReductionPercent * 0.01)));
+            if(FuelQuantity > TankCapacity)
+            {
+                FuelQuantity = TankCapacity;
+            }
+        }
+           // => FuelQuantity += (litres * (1 - (fuelReductionPercent * 0.01)));
     }
 }

@@ -16,11 +16,15 @@ namespace Vehicles.Factories
             IVehicle vehicle = null;
             if (vehicleInfo[0] == "Car")
             {
-                vehicle = new Car(double.Parse(vehicleInfo[1]), double.Parse(vehicleInfo[2]));
+                vehicle = new Car(double.Parse(vehicleInfo[1]), double.Parse(vehicleInfo[2]), double.Parse(vehicleInfo[3]));
             }
             else if(vehicleInfo[0] == "Truck")
             {
-                vehicle = new Truck(double.Parse(vehicleInfo[1]), double.Parse(vehicleInfo[2]));
+                vehicle = new Truck(double.Parse(vehicleInfo[1]), double.Parse(vehicleInfo[2]), double.Parse(vehicleInfo[3]));
+            }
+            else if (vehicleInfo[0] == "Bus")
+            {
+                vehicle = new Bus(double.Parse(vehicleInfo[1]), double.Parse(vehicleInfo[2]), double.Parse(vehicleInfo[3]));
             }
             return vehicle;
         }

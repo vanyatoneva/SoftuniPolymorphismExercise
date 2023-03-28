@@ -33,10 +33,12 @@ namespace Vehicles.Core
             vehicles.Add((Car)_vehicleFactory.CreateVehicle(carInfos));
             string[] truckInfo = Reader.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries);
             vehicles.Add((Truck)_vehicleFactory.CreateVehicle(truckInfo));
+            string[] busInfo = Reader.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries);
+            vehicles.Add((Bus)_vehicleFactory.CreateVehicle(busInfo));
 
             int commandCount = int.Parse(Reader.ReadLine());
 
-            while(commandCount-- > 0)
+            while (commandCount-- > 0)
             {
                 string[] command = Reader.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries);
                 IVehicle vehicle = vehicles.FirstOrDefault(v => v.GetType().Name == command[1]);
@@ -46,7 +48,19 @@ namespace Vehicles.Core
                 }
                 else if (command[0] == "Refuel")
                 {
-                    vehicle.Refuel(double.Parse(command[2]));
+                    try
+                    {
+                        vehicle.Refuel(double.Parse(command[2]));
+                    }
+                    catch (ArgumentException ex)
+                    {
+                        Writer.WriteLine(ex.Message);
+                    }
+                }
+                else if (command[0] == "DriveEmpty")
+                {
+                    Bus bus = (Bus)vehicle;
+                    Console.WriteLine(bus.DriveEmpty(double.Parse(command[2])));
                 }
             }
 
