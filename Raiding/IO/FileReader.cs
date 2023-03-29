@@ -9,7 +9,6 @@ namespace Vehicles.IO
 {
     public class FileReader : IReader
     {
-        private int index = 0;
         public FileReader(string path)
         {
             Path = path;
@@ -20,8 +19,7 @@ namespace Vehicles.IO
         {
             using (StreamReader sr =  new StreamReader(Path))
             {
-                string line =  sr.ReadLine();
-                return line;
+                return sr.ReadLine();
             }
         }
     }
